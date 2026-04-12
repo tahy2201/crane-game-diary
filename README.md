@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# クレーンゲーム記録アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+クレーンゲームのプレイ履歴を複数人で共有・記録・分析するモバイル向けWebアプリです。
 
-Currently, two official plugins are available:
+## 技術スタック
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| レイヤー | 選定 |
+|----------|------|
+| ビルドツール | Vite |
+| フロントエンド | React + TypeScript |
+| ルーティング | React Router v6（HashRouter） |
+| UIコンポーネント | shadcn/ui + Tailwind CSS |
+| バックエンド | Supabase（DB・Auth・Storage） |
+| ホスティング | GitHub Pages |
 
-## React Compiler
+## 開発環境のセットアップ
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+詳細は [docs/setup-orbstack.md](./docs/setup-orbstack.md) を参照してください。
 
-## Expanding the ESLint configuration
+### 必要なもの
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- macOS
+- Homebrew
+- OrbStack（Docker Desktop の代替）
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 手順
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# 1. リポジトリをクローン
+git clone https://github.com/tahy2201/crane-game-diary.git
+cd crane-game-diary
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 2. OrbStack を起動（メニューバーにアイコンが出るまで待つ）
+open -a OrbStack
+
+# 3. ローカルSupabaseを起動
+supabase start
+
+# 4. 環境変数を設定
+cp .env.example .env.local
+# .env.local を開き、supabase start で表示された Publishable キーを貼る
+
+# 5. 依存パッケージをインストールして起動
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`http://localhost:5173` で画面が開けば完了です。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## よく使うコマンド
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev        # 開発サーバー起動
+npm run build      # 本番ビルド
+supabase start     # ローカルDB起動
+supabase stop      # ローカルDB停止
+supabase db reset  # DBをリセット（マイグレーション再適用）
+supabase status    # 接続情報の確認
 ```
+
+## ディレクトリ構成
+
+```
+src/
+├── components/
+│   └── ui/          # shadcn/ui コンポーネント（自動生成）
+├── lib/
+│   ├── supabase.ts  # Supabase クライアント
+│   └── utils.ts     # ユーティリティ
+├── pages/           # 画面コンポーネント
+│   ├── Timeline.tsx    # タイムライン（ホーム）
+│   ├── RecordNew.tsx   # プレイ記録入力
+│   ├── Arcades.tsx     # ゲーセン一覧
+│   └── NotFound.tsx    # 404
+└── App.tsx          # ルーティング定義
+supabase/
+└── migrations/      # DBマイグレーションファイル
+docs/
+└── setup-orbstack.md  # 環境構築手順書
+```
+
+## フェーズ
+
+- **Phase 1（MVP）**: プレイ記録・タイムライン・ゲーセン管理・グループ招待
+- **Phase 2**: 写真・GPS・検索・グラフ
+- **Phase 3**: ウィッシュリスト・予算管理・エクスポート
