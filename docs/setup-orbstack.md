@@ -63,6 +63,25 @@ supabase --version
 
 ---
 
+## Step 2.5: OrbStack を起動する（必須）
+
+**supabase start を実行する前に、OrbStack が起動している必要があります。**
+
+アプリケーションフォルダから OrbStack を開くか、以下のコマンドで起動してください。
+
+```bash
+open -a OrbStack
+```
+
+メニューバーに OrbStack のアイコンが表示されれば起動完了ですわ。  
+起動せずに `supabase start` を実行すると以下のエラーが出ます（OrbStack 未起動の場合）：
+
+```
+Cannot connect to the Docker daemon at unix:///Users/.../.docker/run/docker.sock.
+```
+
+---
+
 ## Step 3: プロジェクトのクローン
 
 ```bash
@@ -85,18 +104,28 @@ supabase start
 起動が完了すると以下のような出力が表示されますわ：
 
 ```
-Started supabase local development setup.
+╭──────────────────────────────────────╮
+│ 🔧 Development Tools                 │
+├─────────┬────────────────────────────┤
+│ Studio  │ http://127.0.0.1:54323     │
+│ Mailpit │ http://127.0.0.1:54324     │
+╰─────────┴────────────────────────────╯
 
-         API URL: http://127.0.0.1:54321
-     GraphQL URL: http://127.0.0.1:54321/graphql/v1
-  S3 Storage URL: http://127.0.0.1:54321/storage/v1/s3
-          DB URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
-      Studio URL: http://127.0.0.1:54323
-    Inbucket URL: http://127.0.0.1:54324   ← メール確認の代替（ローカル）
-      JWT secret: ...
-        anon key: ...
-service_role key: ...
+╭──────────────────────────────────────╮
+│ 🌐 APIs                              │
+├────────────────┬─────────────────────┤
+│ Project URL    │ http://127.0.0.1:54321 │
+╰────────────────┴─────────────────────╯
+
+╭──────────────────────────────────────────────────────────────╮
+│ 🔑 Authentication Keys                                       │
+├─────────────┬────────────────────────────────────────────────┤
+│ Publishable │ sb_publishable_XXXX...  ← フロントエンドで使う  │
+│ Secret      │ sb_secret_XXXX...       ← サーバーサイド専用    │
+╰─────────────┴────────────────────────────────────────────────╯
 ```
+
+> **注意**: 旧バージョンの `anon key` は新バージョンでは `Publishable` キーに名称変更されましたわ。
 
 ### 4-2. Studio（管理画面）を開く
 
