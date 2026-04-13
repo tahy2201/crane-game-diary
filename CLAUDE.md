@@ -37,10 +37,24 @@ supabase stop     # 停止
 supabase db reset # DBリセット（マイグレーション再適用）
 ```
 
-マイグレーションファイルは `supabase/migrations/` に格納する。
+## DB スキーマ管理（Drizzle ORM）
+
+スキーマは `src/db/schema.ts` で一元管理する。テーブル変更は以下の手順で行う。
 
 ```bash
-supabase migration new <名前>  # 新しいマイグレーションファイルを作成
+# 1. src/db/schema.ts を編集
+# 2. マイグレーション SQL を生成
+npm run db:generate
+
+# 3. ローカル DB に反映（supabase start が必要）
+supabase db reset
+```
+
+スキーマから型は自動推論されるため、`src/types/index.ts` を直接編集しないこと。
+
+```bash
+npm run db:push    # マイグレーションファイルを作らずローカル DB に直接反映（開発時の試行錯誤向け）
+npm run db:studio  # Drizzle Studio（GUI）を起動
 ```
 
 ## 環境変数
@@ -49,6 +63,7 @@ supabase migration new <名前>  # 新しいマイグレーションファイル
 |--------|------|
 | `VITE_SUPABASE_URL` | Supabase の Project URL |
 | `VITE_SUPABASE_ANON_KEY` | Supabase の Publishable キー（旧: anon key） |
+| `DATABASE_URL` | Drizzle Kit 用 PostgreSQL 接続 URL（ローカル: `postgresql://postgres:postgres@localhost:54322/postgres`） |
 
 ## ルーティング
 

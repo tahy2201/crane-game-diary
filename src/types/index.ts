@@ -1,10 +1,5 @@
-export type Play = {
-  id: string;
-  memo: string | null;
-  spent: number;
-  result: 'got' | 'failed';
-  played_at: string;
-  created_at: string;
-};
+import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
+import type { plays } from '@/db/schema';
 
-export type NewPlay = Omit<Play, 'id' | 'created_at'>;
+export type Play = InferSelectModel<typeof plays>;
+export type NewPlay = Omit<InferInsertModel<typeof plays>, 'id' | 'created_at'>;

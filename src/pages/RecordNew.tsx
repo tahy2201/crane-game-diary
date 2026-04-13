@@ -10,7 +10,7 @@ export default function RecordNew() {
     spent: 0,
     result: 'failed',
     memo: '',
-    played_at: new Date().toISOString(),
+    played_at: new Date(),
   });
   const [saving, setSaving] = useState(false);
 
