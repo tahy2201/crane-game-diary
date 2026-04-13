@@ -1,9 +1,9 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
-import NavBar from '@/components/NavBar'
-import Timeline from '@/pages/Timeline'
-import RecordNew from '@/pages/RecordNew'
-import Arcades from '@/pages/Arcades'
-import NotFound from '@/pages/NotFound'
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import NavBar from '@/components/NavBar';
+import Arcades from '@/pages/Arcades';
+import NotFound from '@/pages/NotFound';
+import RecordNew from '@/pages/RecordNew';
+import Timeline from '@/pages/Timeline';
 
 export default function App() {
   return (
@@ -18,5 +18,5 @@ export default function App() {
       </div>
       <NavBar />
     </HashRouter>
-  )
+  );
 }

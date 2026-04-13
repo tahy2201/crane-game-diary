@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
   { to: '/', label: 'タイムライン', icon: '🏠' },
   { to: '/record/new', label: '記録する', icon: '➕' },
   { to: '/arcades', label: 'ゲーセン', icon: '🕹️' },
-]
+];
 
 export default function NavBar() {
   return (
@@ -25,5 +25,5 @@ export default function NavBar() {
         </NavLink>
       ))}
     </nav>
-  )
+  );
 }

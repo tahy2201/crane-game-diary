@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { supabase } from '@/lib/supabase'
-import { Button } from '@/components/ui/button'
-import type { NewPlay } from '@/types'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { supabase } from '@/lib/supabase';
+import type { NewPlay } from '@/types';
 
 export default function RecordNew() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [form, setForm] = useState<NewPlay>({
     spent: 0,
     result: 'failed',
     memo: '',
     played_at: new Date().toISOString(),
-  })
-  const [saving, setSaving] = useState(false)
+  });
+  const [saving, setSaving] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSaving(true)
+    e.preventDefault();
+    setSaving(true);
 
-    const { error } = await supabase.from('plays').insert(form)
+    const { error } = await supabase.from('plays').insert(form);
 
     if (error) {
-      console.error(error)
-      alert('保存に失敗しました')
+      console.error(error);
+      alert('保存に失敗しました');
     } else {
-      navigate('/')
+      navigate('/');
     }
-    setSaving(false)
-  }
+    setSaving(false);
+  };
 
   return (
     <div className="p-4 max-w-md mx-auto">
@@ -35,22 +35,32 @@ export default function RecordNew() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1">投入金額（円）</label>
+          <label htmlFor="spent" className="block text-sm font-medium mb-1">
+            投入金額（円）
+          </label>
           <input
+            id="spent"
             type="number"
             required
             min={0}
             value={form.spent}
-            onChange={(e) => setForm({ ...form, spent: Number(e.target.value) })}
+            onChange={(e) =>
+              setForm({ ...form, spent: Number(e.target.value) })
+            }
             className="border rounded px-3 py-2 w-full"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">結果</label>
+          <label htmlFor="result" className="block text-sm font-medium mb-1">
+            結果
+          </label>
           <select
+            id="result"
             value={form.result}
-            onChange={(e) => setForm({ ...form, result: e.target.value as NewPlay['result'] })}
+            onChange={(e) =>
+              setForm({ ...form, result: e.target.value as NewPlay['result'] })
+            }
             className="border rounded px-3 py-2 w-full"
           >
             <option value="failed">失敗</option>
@@ -59,8 +69,11 @@ export default function RecordNew() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">メモ</label>
+          <label htmlFor="memo" className="block text-sm font-medium mb-1">
+            メモ
+          </label>
           <input
+            id="memo"
             type="text"
             value={form.memo ?? ''}
             onChange={(e) => setForm({ ...form, memo: e.target.value })}
@@ -79,5 +92,5 @@ export default function RecordNew() {
         </div>
       </form>
     </div>
-  )
+  );
 }
