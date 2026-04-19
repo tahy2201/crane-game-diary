@@ -65,12 +65,8 @@
           "name": "arcades_group_id_groups_group_id_fk",
           "tableFrom": "arcades",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -117,12 +113,8 @@
           "name": "crane_types_group_id_groups_group_id_fk",
           "tableFrom": "crane_types",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -171,12 +163,8 @@
           "name": "group_members_group_id_groups_group_id_fk",
           "tableFrom": "group_members",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -184,12 +172,8 @@
           "name": "group_members_user_id_users_user_id_fk",
           "tableFrom": "group_members",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -197,10 +181,7 @@
       "compositePrimaryKeys": {
         "group_members_group_id_user_id_pk": {
           "name": "group_members_group_id_user_id_pk",
-          "columns": [
-            "group_id",
-            "user_id"
-          ]
+          "columns": ["group_id", "user_id"]
         }
       },
       "uniqueConstraints": {},
@@ -291,12 +272,8 @@
           "name": "invite_tokens_group_id_groups_group_id_fk",
           "tableFrom": "invite_tokens",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -306,9 +283,7 @@
         "invite_tokens_token_unique": {
           "name": "invite_tokens_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         }
       },
       "policies": {},
@@ -395,12 +370,8 @@
           "name": "plays_group_id_groups_group_id_fk",
           "tableFrom": "plays",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -408,12 +379,8 @@
           "name": "plays_arcade_id_arcades_arcade_id_fk",
           "tableFrom": "plays",
           "tableTo": "arcades",
-          "columnsFrom": [
-            "arcade_id"
-          ],
-          "columnsTo": [
-            "arcade_id"
-          ],
+          "columnsFrom": ["arcade_id"],
+          "columnsTo": ["arcade_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -421,12 +388,8 @@
           "name": "plays_user_id_users_user_id_fk",
           "tableFrom": "plays",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -434,12 +397,8 @@
           "name": "plays_prize_id_prizes_prize_id_fk",
           "tableFrom": "plays",
           "tableTo": "prizes",
-          "columnsFrom": [
-            "prize_id"
-          ],
-          "columnsTo": [
-            "prize_id"
-          ],
+          "columnsFrom": ["prize_id"],
+          "columnsTo": ["prize_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -486,12 +445,8 @@
           "name": "prize_categories_group_id_groups_group_id_fk",
           "tableFrom": "prize_categories",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -576,12 +531,8 @@
           "name": "prizes_group_id_groups_group_id_fk",
           "tableFrom": "prizes",
           "tableTo": "groups",
-          "columnsFrom": [
-            "group_id"
-          ],
-          "columnsTo": [
-            "group_id"
-          ],
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["group_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -589,12 +540,8 @@
           "name": "prizes_prize_category_id_prize_categories_prize_category_id_fk",
           "tableFrom": "prizes",
           "tableTo": "prize_categories",
-          "columnsFrom": [
-            "prize_category_id"
-          ],
-          "columnsTo": [
-            "prize_category_id"
-          ],
+          "columnsFrom": ["prize_category_id"],
+          "columnsTo": ["prize_category_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -602,12 +549,8 @@
           "name": "prizes_crane_type_id_crane_types_crane_type_id_fk",
           "tableFrom": "prizes",
           "tableTo": "crane_types",
-          "columnsFrom": [
-            "crane_type_id"
-          ],
-          "columnsTo": [
-            "crane_type_id"
-          ],
+          "columnsFrom": ["crane_type_id"],
+          "columnsTo": ["crane_type_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -669,9 +612,7 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},
@@ -683,27 +624,17 @@
     "public.freshness": {
       "name": "freshness",
       "schema": "public",
-      "values": [
-        "new",
-        "mid",
-        "old"
-      ]
+      "values": ["new", "mid", "old"]
     },
     "public.group_role": {
       "name": "group_role",
       "schema": "public",
-      "values": [
-        "owner",
-        "member"
-      ]
+      "values": ["owner", "member"]
     },
     "public.play_result": {
       "name": "play_result",
       "schema": "public",
-      "values": [
-        "got",
-        "failed"
-      ]
+      "values": ["got", "failed"]
     }
   },
   "schemas": {},

@@ -7,10 +7,14 @@ import type { NewPlay } from '@/types';
 export default function RecordNew() {
   const navigate = useNavigate();
   const [form, setForm] = useState<NewPlay>({
-    spent: 0,
+    group_id: '',
+    arcade_id: 0,
+    user_id: '',
+    date: new Date(),
     result: 'failed',
+    play_count: 1,
+    rate_per_play: 100,
     memo: '',
-    played_at: new Date(),
   });
   const [saving, setSaving] = useState(false);
 
@@ -35,17 +39,40 @@ export default function RecordNew() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="spent" className="block text-sm font-medium mb-1">
-            投入金額（円）
+          <label
+            htmlFor="play_count"
+            className="block text-sm font-medium mb-1"
+          >
+            プレイ回数
           </label>
           <input
-            id="spent"
+            id="play_count"
+            type="number"
+            required
+            min={1}
+            value={form.play_count}
+            onChange={(e) =>
+              setForm({ ...form, play_count: Number(e.target.value) })
+            }
+            className="border rounded px-3 py-2 w-full"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="rate_per_play"
+            className="block text-sm font-medium mb-1"
+          >
+            1プレイ料金（円）
+          </label>
+          <input
+            id="rate_per_play"
             type="number"
             required
             min={0}
-            value={form.spent}
+            value={form.rate_per_play}
             onChange={(e) =>
-              setForm({ ...form, spent: Number(e.target.value) })
+              setForm({ ...form, rate_per_play: Number(e.target.value) })
             }
             className="border rounded px-3 py-2 w-full"
           />

@@ -11,7 +11,7 @@ export default function Timeline() {
       const { data, error } = await supabase
         .from('plays')
         .select('*')
-        .order('played_at', { ascending: false });
+        .order('date', { ascending: false });
 
       if (error) {
         console.error(error);
@@ -35,16 +35,18 @@ export default function Timeline() {
       ) : (
         <ul className="space-y-3">
           {plays.map((play) => (
-            <li key={play.id} className="border rounded-lg p-3">
+            <li key={play.play_id} className="border rounded-lg p-3">
               <div className="flex justify-between items-center">
                 <span className="font-medium">
                   {play.result === 'got' ? '✅ 獲得' : '❌ 失敗'}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  {new Date(play.played_at).toLocaleDateString('ja-JP')}
+                  {new Date(play.date).toLocaleDateString('ja-JP')}
                 </span>
               </div>
-              <p className="text-sm mt-1">{play.spent}円</p>
+              <p className="text-sm mt-1">
+                {play.play_count * play.rate_per_play}円
+              </p>
               {play.memo && (
                 <p className="text-sm text-muted-foreground mt-1">
                   {play.memo}

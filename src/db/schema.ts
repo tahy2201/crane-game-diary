@@ -1,14 +1,14 @@
 import {
-  pgTable,
-  pgEnum,
-  text,
-  integer,
-  serial,
-  timestamp,
-  uuid,
   boolean,
   doublePrecision,
+  integer,
+  pgEnum,
+  pgTable,
   primaryKey,
+  serial,
+  text,
+  timestamp,
+  uuid,
 } from 'drizzle-orm/pg-core';
 
 // ---------- Enums ----------
@@ -25,7 +25,9 @@ export const users = pgTable('users', {
   display_name: text('display_name').notNull(),
   is_deleted: boolean('is_deleted').notNull().default(false),
   deleted_at: timestamp('deleted_at', { withTimezone: true }),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 // ---------- Groups ----------
@@ -33,7 +35,9 @@ export const users = pgTable('users', {
 export const groups = pgTable('groups', {
   group_id: uuid('group_id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 // ---------- GroupMembers ----------
@@ -48,7 +52,9 @@ export const groupMembers = pgTable(
       .notNull()
       .references(() => users.user_id),
     role: groupRoleEnum('role').notNull().default('member'),
-    joined_at: timestamp('joined_at', { withTimezone: true }).notNull().defaultNow(),
+    joined_at: timestamp('joined_at', { withTimezone: true })
+      .notNull()
+      .defaultNow(),
   },
   (table) => [primaryKey({ columns: [table.group_id, table.user_id] })],
 );
@@ -63,7 +69,9 @@ export const inviteTokens = pgTable('invite_tokens', {
   token: text('token').notNull().unique(),
   expires_at: timestamp('expires_at', { withTimezone: true }).notNull(),
   is_active: boolean('is_active').notNull().default(true),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 // ---------- Arcades ----------
@@ -78,7 +86,9 @@ export const arcades = pgTable('arcades', {
   longitude: doublePrecision('longitude'),
   memo: text('memo'),
   is_favorite: boolean('is_favorite').notNull().default(false),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 // ---------- PrizeCategories ----------
@@ -117,7 +127,9 @@ export const prizes = pgTable('prizes', {
   photo_url: text('photo_url'),
   estimated_value: integer('estimated_value'),
   memo: text('memo'),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 // ---------- Plays ----------
@@ -139,5 +151,7 @@ export const plays = pgTable('plays', {
   play_count: integer('play_count').notNull(),
   rate_per_play: integer('rate_per_play').notNull(),
   memo: text('memo'),
-  created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  created_at: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
