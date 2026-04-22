@@ -25,6 +25,7 @@ export default function NavBar() {
       <header className="fixed top-0 left-0 right-0 border-b bg-background flex items-center justify-between px-4 py-2 text-xs text-muted-foreground z-10">
         <span>{displayName}</span>
         <button
+          type="button"
           onClick={handleLogout}
           className="text-destructive underline"
         >

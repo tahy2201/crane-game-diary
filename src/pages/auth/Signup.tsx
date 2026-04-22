@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/lib/supabase';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -18,7 +18,10 @@ export default function Signup() {
     setError('');
     setIsLoading(true);
 
-    const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
     if (signUpError || !data.user) {
       setError(signUpError?.message ?? '登録に失敗しました');
