@@ -20,7 +20,7 @@ export const freshnessEnum = pgEnum('freshness', ['new', 'mid', 'old']);
 // ---------- Users ----------
 
 export const users = pgTable('users', {
-  user_id: uuid('user_id').primaryKey().defaultRandom(),
+  user_id: uuid('user_id').primaryKey(),
   email: text('email').notNull().unique(),
   display_name: text('display_name').notNull(),
   is_deleted: boolean('is_deleted').notNull().default(false),

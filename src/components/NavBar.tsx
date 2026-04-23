@@ -10,7 +10,8 @@ const navItems = [
 
 export default function NavBar() {
   const { profile, session } = useAuthStore();
-  const displayName = profile?.display_name ?? session?.user.email ?? '';
+  const displayName =
+    profile?.display_name ?? session?.user.email?.split('@')[0] ?? 'ユーザー';
   const navigate = useNavigate();
 
   const handleLogout = async () => {

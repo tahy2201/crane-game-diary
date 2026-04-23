@@ -36,7 +36,10 @@ export default function Signup() {
     });
 
     if (insertError) {
-      setError('ユーザー情報の保存に失敗しました');
+      // Auth ユーザーは作成済みだが users テーブルへの挿入が失敗した場合、
+      // 孤立したセッションが残らないようにサインアウトする
+      await supabase.auth.signOut();
+      setError('ユーザー情報の保存に失敗しました。もう一度お試しください');
       setIsLoading(false);
       return;
     }
