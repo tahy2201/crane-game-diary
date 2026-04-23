@@ -1,10 +1,17 @@
+import NavBar from '@/components/NavBar';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
 
 export default function Dev() {
   return (
     <div className="p-6 space-y-8">
+      <section className="space-y-3">
+        <h2 className="text-sm font-medium text-muted-foreground">NavBar（旧）</h2>
+        <div className="relative h-24 bg-muted rounded-lg overflow-hidden">
+          <NavBar />
+        </div>
+      </section>
       <section className="space-y-3">
         <h2 className="text-sm font-medium text-muted-foreground">Input</h2>
         <Input placeholder="ゲームセンター名を入力" />
