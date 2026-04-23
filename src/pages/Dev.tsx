@@ -7,7 +7,9 @@ export default function Dev() {
   return (
     <div className="p-6 space-y-8">
       <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">NavBar（旧）</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">
+          NavBar（旧）
+        </h2>
         <div className="relative h-24 bg-muted rounded-lg overflow-hidden">
           <NavBar />
         </div>

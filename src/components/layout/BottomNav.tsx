@@ -1,5 +1,5 @@
+import { Gift, Home, MapPin, Settings } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { Home, MapPin, Gift, Settings } from 'lucide-react';
 
 const navItems = [
   { to: '/timeline', label: 'タイムライン', icon: Home },

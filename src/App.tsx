@@ -10,9 +10,9 @@ import Login from '@/pages/auth/Login';
 import Signup from '@/pages/auth/Signup';
 import Dev from '@/pages/Dev';
 import NotFound from '@/pages/NotFound';
-import Timeline from '@/pages/Timeline';
 import Prizes from '@/pages/prize';
 import Settings from '@/pages/settings';
+import Timeline from '@/pages/Timeline';
 
 function AppContent() {
   useAuth();
@@ -25,18 +25,52 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Navigate to="/timeline" replace />} />
-          <Route path="/timeline" element={<AuthGuard><Timeline /></AuthGuard>} />
-          <Route path="/arcades" element={<AuthGuard><Arcades /></AuthGuard>} />
-          <Route path="/prizes" element={<AuthGuard><Prizes /></AuthGuard>} />
-          <Route path="/settings" element={<AuthGuard><Settings /></AuthGuard>} />
+          <Route
+            path="/timeline"
+            element={
+              <AuthGuard>
+                <Timeline />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/arcades"
+            element={
+              <AuthGuard>
+                <Arcades />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/prizes"
+            element={
+              <AuthGuard>
+                <Prizes />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <AuthGuard>
+                <Settings />
+              </AuthGuard>
+            }
+          />
           <Route path="/dev" element={<Dev />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <BottomNav />
       <FAB onClick={() => setFabOpen(true)} />
-      <Modal open={fabOpen} onClose={() => setFabOpen(false)} title="プレイを記録">
-        <p className="text-sm text-muted-foreground">記録フォームはここに入ります</p>
+      <Modal
+        open={fabOpen}
+        onClose={() => setFabOpen(false)}
+        title="プレイを記録"
+      >
+        <p className="text-sm text-muted-foreground">
+          記録フォームはここに入ります
+        </p>
       </Modal>
     </>
   );
