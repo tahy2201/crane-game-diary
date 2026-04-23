@@ -84,6 +84,23 @@ npm run db:studio  # Drizzle Studio（GUI）を起動
   - 例: `chore: shadcn/ui をセットアップ`
   - 例: `docs: README を更新`
 
+## Biome（Lint / Format）
+
+- push 前に必ず以下のチェックをローカルで実行すること
+
+```bash
+npm run lint       # Biome lint & format チェック
+npx tsc -b --noEmit  # TypeScript 型チェック
+npm run build      # ビルド確認
+```
+
+### Biome ルールの例外設定について
+
+- 原則として Biome のルールを `off` にする対応、および `biome-ignore` コメントによるインライン無効化は行わない
+- 例外として `src/components/ui/` は `a11y/noLabelWithoutControl` を無効化している
+  - 理由: shadcn/ui の自動生成コンポーネントは `{...props}` 経由で `htmlFor` を受け取る設計のため、Biome の静的解析では正常なコードを誤検知してしまうため
+  - 設定箇所: `biome.json` の `overrides`
+
 ## 注意事項
 
 - `HashRouter` を使っているため、URL は `/#/` から始まる形式になる

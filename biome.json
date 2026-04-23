@@ -27,5 +27,17 @@
   "assist": {
     "enabled": true,
     "actions": { "source": { "organizeImports": "on" } }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/components/ui/**"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noLabelWithoutControl": "off"
+          }
+        }
+      }
+    }
+  ]
 }
