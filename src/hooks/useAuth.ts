@@ -6,7 +6,8 @@ export function useAuth() {
   const { setSession, setProfile, setLoading } = useAuthStore();
 
   useEffect(() => {
-    supabase.auth.getSession()
+    supabase.auth
+      .getSession()
       .then(({ data: { session }, error }) => {
         if (error) {
           console.error('Failed to get initial session:', error);
