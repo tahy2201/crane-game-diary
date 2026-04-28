@@ -30,7 +30,7 @@
   },
   "overrides": [
     {
-      "includes": ["src/components/ui/**"],
+      "includes": ["src/components/shadcn-ui/**"],
       "linter": {
         "rules": {
           "a11y": {
