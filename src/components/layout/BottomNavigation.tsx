@@ -1,6 +1,7 @@
 import { Gift, Home, MapPin, Settings } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
+/** 画面下部に固定表示されるタブナビゲーション。最大幅 640px で中央揃え */
 const navItems = [
   { to: '/timeline', label: 'タイムライン', icon: Home },
   { to: '/arcades', label: 'ゲーセン', icon: MapPin },
@@ -8,7 +9,7 @@ const navItems = [
   { to: '/settings', label: '設定', icon: Settings },
 ];
 
-export default function BottomNav() {
+export default function BottomNavigation() {
   return (
     <div className="fixed bottom-0 left-0 right-0 flex justify-center">
       <nav className="flex w-full max-w-[640px] bg-card">

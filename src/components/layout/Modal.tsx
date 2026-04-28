@@ -8,6 +8,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+/** 画面下部からスライドアップするボトムシートモーダル。@base-ui/react の Dialog をラップ */
 export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <Dialog.Root open={open} onOpenChange={(o) => !o && onClose()}>

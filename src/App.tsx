@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AuthGuard from '@/components/AuthGuard';
-import BottomNav from '@/components/layout/BottomNav';
-import FAB from '@/components/layout/FAB';
+import BottomNavigation from '@/components/layout/BottomNavigation';
+import FloatingActionButton from '@/components/layout/FloatingActionButton';
 import Modal from '@/components/layout/Modal';
 import { useAuth } from '@/hooks/useAuth';
 import Arcades from '@/pages/Arcades';
@@ -14,12 +14,14 @@ import Prizes from '@/pages/prize';
 import Settings from '@/pages/settings';
 import Timeline from '@/pages/Timeline';
 
+/** ルーティングと共通レイアウト（BottomNavigation・FloatingActionButton・Modal）を束ねるコンポーネント */
 function AppContent() {
   useAuth();
-  const [fabOpen, setFabOpen] = useState(false);
+  const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
 
   return (
     <>
+      {/* BottomNavigation の高さ分だけ下部に余白を確保 */}
       <div className="pb-16">
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -61,11 +63,11 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <BottomNav />
-      <FAB onClick={() => setFabOpen(true)} />
+      <BottomNavigation />
+      <FloatingActionButton onClick={() => setIsRecordModalOpen(true)} />
       <Modal
-        open={fabOpen}
-        onClose={() => setFabOpen(false)}
+        open={isRecordModalOpen}
+        onClose={() => setIsRecordModalOpen(false)}
         title="プレイを記録"
       >
         <p className="text-sm text-muted-foreground">
@@ -76,6 +78,7 @@ function AppContent() {
   );
 }
 
+/** HashRouter でラップしたアプリケーションルート。GitHub Pages 対応のため HashRouter を使用 */
 export default function App() {
   return (
     <HashRouter>
