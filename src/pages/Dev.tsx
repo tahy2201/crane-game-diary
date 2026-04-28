@@ -1,7 +1,7 @@
 import NavBar from '@/components/NavBar';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/shadcn-ui/badge';
+import { Input } from '@/components/shadcn-ui/input';
+import { Textarea } from '@/components/shadcn-ui/textarea';
 
 export default function Dev() {
   return (
