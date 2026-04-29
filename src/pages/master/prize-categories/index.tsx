@@ -1,5 +1,5 @@
 import { Pencil, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PrizeCategoryModal from '@/components/master/PrizeCategoryModal';
 import { Badge } from '@/components/shadcn-ui/badge';
@@ -17,6 +17,21 @@ export default function PrizeCategories() {
 
   const systemItems = prizeCategories.filter((c) => c.is_system);
   const groupItems = prizeCategories.filter((c) => !c.is_system);
+
+  const handleSave = useCallback(
+    async (name: string) => {
+      if (modal.item) {
+        await update(modal.item.prize_category_id, name);
+      } else {
+        await add(name);
+      }
+    },
+    [modal.item, update, add],
+  );
+
+  const handleDelete = useCallback(async () => {
+    if (modal.item) await remove(modal.item.prize_category_id);
+  }, [modal.item, remove]);
 
   if (isLoading) {
     return (
@@ -76,20 +91,8 @@ export default function PrizeCategories() {
         open={modal.open}
         item={modal.item}
         onClose={() => setModal({ open: false })}
-        onSave={async (name) => {
-          if (modal.item) {
-            await update(modal.item.prize_category_id, name);
-          } else {
-            await add(name);
-          }
-        }}
-        onDelete={
-          modal.item
-            ? async () => {
-                if (modal.item) await remove(modal.item.prize_category_id);
-              }
-            : undefined
-        }
+        onSave={handleSave}
+        onDelete={modal.item ? handleDelete : undefined}
       />
     </div>
   );
