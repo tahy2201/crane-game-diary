@@ -19,7 +19,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/shadcn-ui/alert-dialog';
 import { supabase } from '@/lib/supabase';
 
@@ -74,6 +73,7 @@ function SettingsLinkRow({
 export default function Settings() {
   const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   // S-03 招待リンク発行モーダルの開閉状態
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
 
@@ -125,14 +125,16 @@ export default function Settings() {
           destructive
           onClick={() => navigate('/delete-account')}
         />
-        <AlertDialog>
-          <AlertDialogTrigger className="w-full">
-            <SettingsLinkRow
-              icon={<LogOut className="size-4" />}
-              label="ログアウト"
-              destructive
-            />
-          </AlertDialogTrigger>
+        <SettingsLinkRow
+          icon={<LogOut className="size-4" />}
+          label="ログアウト"
+          destructive
+          onClick={() => setIsLogoutDialogOpen(true)}
+        />
+        <AlertDialog
+          open={isLogoutDialogOpen}
+          onOpenChange={setIsLogoutDialogOpen}
+        >
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>ログアウトしますか？</AlertDialogTitle>
