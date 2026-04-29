@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import AuthGuard from '@/components/AuthGuard';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import FloatingActionButton from '@/components/layout/FloatingActionButton';
@@ -12,16 +18,23 @@ import Dev from '@/pages/Dev';
 import DeleteAccount from '@/pages/delete-account';
 import GroupNew from '@/pages/group-new';
 import Master from '@/pages/master';
+import CraneTypesPage from '@/pages/master/crane-types';
+import PrizeCategoriesPage from '@/pages/master/prize-categories';
 import NotFound from '@/pages/NotFound';
 import OwnerTransfer from '@/pages/owner-transfer';
 import Prizes from '@/pages/prize';
 import Settings from '@/pages/settings';
 import Timeline from '@/pages/Timeline';
 
+/** FAB を表示するパス。BottomNavigation のタブ画面のみに限定する */
+const FAB_VISIBLE_PATHS = ['/timeline', '/arcades', '/prizes'];
+
 /** ルーティングと共通レイアウト（BottomNavigation・FloatingActionButton・Modal）を束ねるコンポーネント */
 function AppContent() {
   useAuth();
+  const { pathname } = useLocation();
   const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
+  const showFab = FAB_VISIBLE_PATHS.includes(pathname);
 
   return (
     <>
@@ -80,6 +93,22 @@ function AppContent() {
             }
           />
           <Route
+            path="/master/prize-categories"
+            element={
+              <AuthGuard>
+                <PrizeCategoriesPage />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/master/crane-types"
+            element={
+              <AuthGuard>
+                <CraneTypesPage />
+              </AuthGuard>
+            }
+          />
+          <Route
             path="/owner-transfer"
             element={
               <AuthGuard>
@@ -100,7 +129,9 @@ function AppContent() {
         </Routes>
       </div>
       <BottomNavigation />
-      <FloatingActionButton onClick={() => setIsRecordModalOpen(true)} />
+      {showFab && (
+        <FloatingActionButton onClick={() => setIsRecordModalOpen(true)} />
+      )}
       <Modal
         open={isRecordModalOpen}
         onClose={() => setIsRecordModalOpen(false)}
