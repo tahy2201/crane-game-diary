@@ -34,3 +34,4 @@ dist-ssr
 # Supabase
 supabase/.branches
 supabase/.temp
+supabase/snippets
