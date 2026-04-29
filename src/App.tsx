@@ -9,7 +9,11 @@ import Arcades from '@/pages/Arcades';
 import Login from '@/pages/auth/Login';
 import Signup from '@/pages/auth/Signup';
 import Dev from '@/pages/Dev';
+import DeleteAccount from '@/pages/delete-account';
+import GroupNew from '@/pages/group-new';
+import Master from '@/pages/master';
 import NotFound from '@/pages/NotFound';
+import OwnerTransfer from '@/pages/owner-transfer';
 import Prizes from '@/pages/prize';
 import Settings from '@/pages/settings';
 import Timeline from '@/pages/Timeline';
@@ -56,6 +60,38 @@ function AppContent() {
             element={
               <AuthGuard>
                 <Settings />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/group/new"
+            element={
+              <AuthGuard>
+                <GroupNew />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/master"
+            element={
+              <AuthGuard>
+                <Master />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/owner-transfer"
+            element={
+              <AuthGuard>
+                <OwnerTransfer />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/delete-account"
+            element={
+              <AuthGuard>
+                <DeleteAccount />
               </AuthGuard>
             }
           />
