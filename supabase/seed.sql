@@ -38,6 +38,26 @@ INSERT INTO users (user_id, email, display_name) VALUES
   ('aaaaaaaa-0000-0000-0000-000000000001', 'alice@example.com', 'Alice'),
   ('bbbbbbbb-0000-0000-0000-000000000002', 'bob@example.com',   'Bob');
 
+-- ============================================================
+-- テスト用グループ・メンバー
+--
+-- group1: Alice がオーナー、Bob がメンバー
+-- group2: Bob がオーナー（Alice は非所属）
+--
+-- RLS 確認ポイント:
+--   Alice → system + group1 のみ見える。group2 は見えない
+--   Bob   → system + group1 + group2 すべて見える
+-- ============================================================
+
+INSERT INTO groups (group_id, name) VALUES
+  ('11111111-0000-0000-0000-000000000001', 'Alice のグループ'),
+  ('22222222-0000-0000-0000-000000000002', 'Bob のグループ');
+
+INSERT INTO group_members (group_id, user_id, role) VALUES
+  ('11111111-0000-0000-0000-000000000001', 'aaaaaaaa-0000-0000-0000-000000000001', 'owner'),  -- Alice: group1 owner
+  ('11111111-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000002', 'member'), -- Bob:   group1 member
+  ('22222222-0000-0000-0000-000000000002', 'bbbbbbbb-0000-0000-0000-000000000002', 'owner');  -- Bob:   group2 owner
+
 -- 共通マスタ初期データ
 -- is_system = true のレコードはアプリ上で編集・削除不可
 
@@ -58,3 +78,18 @@ INSERT INTO crane_types (group_id, name, is_system) VALUES
   (NULL, '箱積み',   true),
   (NULL, 'つかみ取り', true),
   (NULL, 'その他',   true);
+
+-- ============================================================
+-- グループ独自マスタ（RLS テスト用）
+-- ============================================================
+
+-- ---------- PrizeCategory グループ独自 ----------
+INSERT INTO prize_categories (group_id, name, is_system) VALUES
+  ('11111111-0000-0000-0000-000000000001', 'アニメグッズ', false), -- group1 独自
+  ('11111111-0000-0000-0000-000000000001', 'ゲームキャラ', false), -- group1 独自
+  ('22222222-0000-0000-0000-000000000002', 'スポーツ用品', false); -- group2 独自（Alice には見えないはず）
+
+-- ---------- CraneType グループ独自 ----------
+INSERT INTO crane_types (group_id, name, is_system) VALUES
+  ('11111111-0000-0000-0000-000000000001', '縦積み', false), -- group1 独自
+  ('22222222-0000-0000-0000-000000000002', '横倒し', false); -- group2 独自（Alice には見えないはず）
